@@ -30,4 +30,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y chromium-chromedriver
-          ln -s /usr/lib/chromium-browser/chromedri
+          sudo ln -sf /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
+
+      - name: Run Selenium Script
+        run: python -u light_speed.py
