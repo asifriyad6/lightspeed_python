@@ -26,15 +26,8 @@ jobs:
         with:
           chrome-version: stable
 
-      - name: Set up ChromeDriver
-        uses: actions/setup-chromedriver@v3
-        with:
-          chromedriver-version: latest
-
-      - name: Run Selenium script
-        run: python your_script.py
-        env:
-          KOUNTA_EMAIL: ${{ secrets.KOUNTA_EMAIL }}
-          KOUNTA_PASSWORD: ${{ secrets.KOUNTA_PASSWORD }}
-          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
-
+      - name: Install ChromeDriver
+        run: |
+          sudo apt update
+          sudo apt install -y chromium-chromedriver
+          ln -s /usr/lib/chromium-browser/chromedri
