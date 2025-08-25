@@ -69,10 +69,12 @@ def force_switch_months_to_hours(driver):
     raise Exception("❌ Could not switch all dropdowns to 'hours' after multiple attempts")
 # --- Set up Chrome ---
 options = Options()
-options.add_argument("--headless=new")
+options.binary_location = "/usr/bin/chromium-browser"  # Point to Chromium binary
+options.add_argument("--headless=new")  # run headless
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
-driver = webdriver.Chrome(options=options)
+
+driver = webdriver.Chrome(service=Service("/usr/bin/chromedriver"), options=options)
 
 try:
     # --- Login ---
@@ -491,3 +493,4 @@ except Exception as e:
         f.write(driver.page_source)
 finally:
     driver.quit()
+
