@@ -26,10 +26,10 @@ jobs:
         with:
           chrome-version: stable
 
-      - name: Install ChromeDriver
-        uses: nanasess/setup-chromedriver@v1
+      - name: Set up ChromeDriver
+        uses: actions/setup-chromedriver@v3
         with:
-          chrome-version: stable
+          chromedriver-version: latest
 
       - name: Run Selenium script
         run: python your_script.py
@@ -37,3 +37,4 @@ jobs:
           KOUNTA_EMAIL: ${{ secrets.KOUNTA_EMAIL }}
           KOUNTA_PASSWORD: ${{ secrets.KOUNTA_PASSWORD }}
           N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+
