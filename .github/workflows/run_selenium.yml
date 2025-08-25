@@ -8,34 +8,30 @@ on:
 jobs:
   selenium:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
-      - name: Install Python dependencies
+      - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
+          pip install --upgrade pip
           pip install selenium requests
 
-      - name: Install Chrome
-        run: |
-          sudo apt update
-          sudo apt install -y wget unzip xvfb libxi6 libgconf-2-4
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt -f install -y
+      - name: Set up Google Chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: stable
 
       - name: Install ChromeDriver
         uses: nanasess/setup-chromedriver@v1
         with:
           chrome-version: stable
 
-      - name: Run Selenium Script
+      - name: Run Selenium script
         run: python your_script.py
         env:
           KOUNTA_EMAIL: ${{ secrets.KOUNTA_EMAIL }}
